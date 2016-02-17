@@ -19,6 +19,7 @@ app.config.from_object(__name__)
 # Routing for your application.
 ###
 
+
 @app.route('/')
 def home():
     """Render website's home page."""
@@ -47,10 +48,21 @@ def add_entry():
     file.save(os.path.join("app/static/uploads", filename))
     return render_template("files.html",title=title)
     #g.db.execute('insert into entries (title, text) values (?, ?)',
-    #             [title, filename])
+    #[title, filename])
     #g.db.commit()
     #flash('New entry was successfully posted')
     #return redirect(url_for('show_entries'))
+@app.route('/filelisting', methods=['POST'])
+def iter_over():
+    " list files uploaded"
+    wd=os.getcwd()
+    print wd
+    for subdir, dirs, files in os.walk(wd 
+                                + '/static/uploads'):
+                                    for files in files:
+                                        print os.path.join(subdir,file)
+                                        
+
 
 @app.route('/login', methods=['POST','GET'])
 def login():
